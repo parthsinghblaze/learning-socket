@@ -4,8 +4,14 @@ let express = require('express'),
     socketIO = require('socket.io'),
     server, io;
 
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb+srv://parth:ashuandcow@cluster0.8nfjdv8.mongodb.net/e-commerce?retryWrites=true&w=majority', {
+    useNewUrlParser: true
+}).then(() => console.log("DB connection successfully"))
+
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + 'index.html')
+    res.sendFile(__dirname + '/index.html')
 })
 
 server = http.Server(app)
@@ -18,11 +24,11 @@ io = socketIO(server);
 
 io.on('connection', function (socket) {
     console.log(`"Hii`)
-    let controllers = ['comments', 'posts']
-
-    for (let i = 0; i<controllers.length; i++) {
-        require('./controllers/' + controllers[i] +
-            '.controller')(socket);
-    }
+    // let controllers = ['comments', 'posts']
+    //
+    // for (let i = 0; i<controllers.length; i++) {
+    //     require('./controllers/' + controllers[i] +
+    //         '.controller')(socket);
+    // }
 
 })

@@ -1,3 +1,5 @@
+var Comment = require('../models/comment');
+
 let comments = [{
     user: 'Batman',
     comment: 'Great post!'
@@ -12,12 +14,10 @@ let comments = [{
     comment: 'I agree with Batman'
 }]
 
-module.exports = function (socket) {
-    // Recent Comments
-    for (let i = 0; i<comments.length; i++) {
-        socket.emit('comment.add', comments[i]);
-        socket.emit('comments.count', {
-            count: i + 1
-        });
-    }
-};
+// module.exports = function (socket) {
+//     // Recent Comments
+//     var cursor = Comment.find().cursor()
+//     cursor.eachAsync(function (comment) {
+//         socket.emit('comment.add', comment);
+//     });
+// };

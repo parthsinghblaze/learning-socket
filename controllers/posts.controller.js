@@ -14,16 +14,3 @@ module.exports = function (socket) {
         });
     }
 };
-
-let i = 0;
-const addingPosts = setInterval(function () {
-    if (posts[i]) {
-        socket.emit('post.add', posts[i]);
-        socket.emit('posts.count', {
-            count: i + 1
-        });
-        i++;
-    } else {
-        clearInterval(addingPosts);
-    }
-}, 2000);
