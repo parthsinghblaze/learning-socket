@@ -5,7 +5,7 @@ let express = require('express'),
     server, io;
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + 'index.html')
+    res.sendFile(__dirname + '/index.html')
 })
 
 server = http.Server(app)
@@ -17,12 +17,9 @@ console.log("Hello i am a server JS")
 io = socketIO(server);
 
 io.on('connection', function (socket) {
-    console.log(`"Hii`)
-    let controllers = ['comments', 'posts']
-
-    for (let i = 0; i<controllers.length; i++) {
-        require('./controllers/' + controllers[i] +
-            '.controller')(socket);
-    }
-
+    setInterval(function () {
+        socket.emit('seconds.update', {
+            time: new Date()
+        });
+    }, 1000);
 })
